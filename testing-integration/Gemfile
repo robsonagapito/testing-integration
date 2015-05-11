@@ -1,0 +1,13 @@
+source 'https://rubygems.org'
+
+group :test, :development do
+  gem 'pry'
+end
+
+group :test do
+  gem "httparty"
+  gem "rspec"
+  gem "rspec-rails"
+  gem "rspec-mocks"
+  gem "rest-client"
+end
