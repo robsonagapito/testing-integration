@@ -40,7 +40,7 @@ describe "Integration Tests" do
     expect(result1["full_name"]).to eq("Stella da Silva Agapito Correa")
   end
 
-  it "Simple Delete", :integ => true  do
+  it "Simple Delete", :integ => false  do
     param = {:user => 
               {:login => "stellaagapito", 
                :full_name => "Stella da Silva Agapito Correa", 
@@ -91,3 +91,29 @@ describe "Integration Tests" do
   end
 
 end
+
+describe "Integration Tests" do
+
+  before(:each) do
+      @param = {:user => 
+          {:login => "", 
+           :full_name => "Stella da Silva Agapito Correa", 
+           :email => "stellasilvaagapito@gmail.com", 
+           :age => "3"
+          }
+        }
+  end
+  
+  context "Simple Post" do
+    let(:resultado) {RestClient.post 'http://localhost:3000/users', @param, :content_type => :json, :accept => :json}
+
+    it "Empty Login ", :integ => true  do  
+      expect{ resultado }.to raise_error.with_message(/422 Unprocessable Entity/)
+    end
+  end
+end
+
+
+
+
+
