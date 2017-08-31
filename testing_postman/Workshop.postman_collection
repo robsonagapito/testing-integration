@@ -1,0 +1,119 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Workshop",
+		"_postman_id": "b6a20649-01b2-d339-2015-61a084311214",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Workshop - Testing Integration - Post",
+			"request": {
+				"url": "http://localhost:3000/users/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": {\"login\": \"stellaagapito\", \n           \"full_name\": \"Stella da Silva Agapito Correa\", \n           \"email\": \"stellasilvaagapito@gmail.com\", \n           \"age\": \"3\"\n              }\n          }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Workshop - Testing Integration - Get All",
+			"request": {
+				"url": "http://localhost:3000/users.json",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Workshop - Testing Integration - Get User",
+			"request": {
+				"url": "http://localhost:3000/users/9.json",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Workshop - Testing Integration - Delete",
+			"request": {
+				"url": "http://localhost:3000/users/1.json",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Workshop - Testing Integration - Put",
+			"request": {
+				"url": "http://localhost:3000/users/9",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": {\"login\": \"stellaagapito\", \n           \"full_name\": \"Stella da Silva Agapito Correa\", \n           \"email\": \"stellasilvaagapito@gmail.com\", \n           \"age\": \"15\"\n              }\n          }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Workshop - Testing Integration - Patch",
+			"request": {
+				"url": "http://localhost:3000/users/9",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": {\n           \"age\": \"20\"\n              }\n          }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
