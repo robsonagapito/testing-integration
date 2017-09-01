@@ -24,9 +24,10 @@
 ## PROJECT TESTING JAVA ##
 /testing_java/.idea
 /testing_java/.idea/*
-/testing_java/targe
-/testing_java/targe/*
+/testing_java/target
+/testing_java/target/*
 /testing_java/testing_java.iml
+/testing_java/Intgration.iml
 
-## PROJECT TESTING JAVA ##
+## PROJECT TESTING RUBY ##
 /testing_ruby/Gemfile.lock
