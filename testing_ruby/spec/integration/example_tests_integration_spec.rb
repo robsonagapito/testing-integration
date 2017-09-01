@@ -3,96 +3,75 @@ require 'spec_helper'
 
 #include RSpec::Expectations
 
-describe "Integration Tests" do
+describe "Integration Tests I" do
 
   before(:each) do
+    @user = User.new
+    @rest = RestSupport.new
   end
   
   after(:each) do
   end
 
   it "Simple GET", :integ => false do
-    ###### EXECUTA O GET BUSCANDO O PRIMEIRO USUÁRIO ######
-    response = RestClient.get 'http://localhost:3000/users/9', :content_type => :json, :accept => :json
-    # puts response.code
-    # puts response.to_str
-    resultado = JSON.parse(response)    
+    ###### EXECUTA O GET BUSCANDO O USUÁRIO COM ID 9 ######
+    @rest.get(@user.base_url(9)) 
 
-    expect(response.code).to eq(200)
-    expect(resultado["login"]).to eq("stellaagapito")
+    expect(@rest.code_status).to eq(200)
+    expect(@rest.json["login"]).to eq("stellaagapito")
   end
 
   it "Simple Post", :integ => false  do
-    param = {:user => 
-              {:login => "stellaagapito", 
-               :full_name => "Stella da Silva Agapito Correa", 
-               :email => "stellasilvaagapito@gmail.com", 
-               :age => "3"
-              }
-            }
-    resp = RestClient.post 'http://localhost:3000/users', param.to_json, :content_type => :json, :accept => :json
-    expect(resp.code).to eq(201)    
-    result = JSON.parse(resp)
+    @user.login = "stellaagapito"
+    @user.full_name = "Stella da Silva Agapito Correa"
+    @user.email = "stellasilvaagapito@gmail.com"
+    @user.age = 5
 
-    resp1 = RestClient.get "http://localhost:3000/users/#{result['id']}", :content_type => :json, :accept => :json
-    result1 = JSON.parse(resp1) 
-    expect(resp1.code).to eq(200)
-    expect(result1["full_name"]).to eq("Stella da Silva Agapito Correa")
+    @rest.post(@user.base_url(''), @user.json)
+    expect(@rest.code_status).to eq(201)
+
+    @rest.get(@user.base_url(@rest.json['id']))
+    expect(@rest.code_status).to eq(200)
+    expect(@rest.json["full_name"]).to eq("Stella da Silva Agapito Correa")
   end
 
-  it "Simple Delete", :integ => false  do
-    param = {:user => 
-              {:login => "stellaagapito", 
-               :full_name => "Stella da Silva Agapito Correa", 
-               :email => "stellasilvaagapito@gmail.com", 
-               :age => "3"
-              }
-            }
+  it "Simple Delete", :integ => true  do
+    @user.login = "stellaagapito"
+    @user.full_name = "Stella da Silva Agapito Correa"
+    @user.email = "stellasilvaagapito@gmail.com"
+    @user.age = 5
+    
+    @rest.post(@user.base_url(''), @user.json)
+    @rest.get(@user.base_url(@rest.json['id']))
+    expect(@rest.json["full_name"]).to eq("Stella da Silva Agapito Correa")
 
-    resp = RestClient.post 'http://localhost:3000/users', param.to_json, :content_type => :json, :accept => :json
-    result = JSON.parse(resp)
-
-    resp1 = RestClient.get "http://localhost:3000/users/#{result['id']}", :content_type => :json, :accept => :json
-    result1 = JSON.parse(resp1) 
-    expect(result1["full_name"]).to eq("Stella da Silva Agapito Correa")
-
-    resp2 = RestClient.delete "http://localhost:3000/users/#{result1['id']}", :content_type => :json, :accept => :json
-    expect(resp2.code).to eq(204)
-
+    @rest.delete(@user.base_url(@rest.json['id']))
+    expect(@rest.code_status).to eq(204)
   end
 
   it "Simple Put", :integ => false  do
-    param = {:user => 
-              {:login => "stellaagapito", 
-               :full_name => "Stella da Silva Agapito Correa", 
-               :email => "stellasilvaagapito@gmail.com", 
-               :age => "3"
-              }
-            }
+    @user.login = "stellaagapito"
+    @user.full_name = "Stella da Silva Agapito Correa"
+    @user.email = "stellasilvaagapito@gmail.com"
+    @user.age = 5
+    
+    @rest.post(@user.base_url(''), @user.json)
+    @rest.get(@user.base_url(@rest.json['id']))
+    expect(@rest.json["full_name"]).to eq("Stella da Silva Agapito Correa")
 
-    resp = RestClient.post 'http://localhost:3000/users', param.to_json, :content_type => :json, :accept => :json
-    result = JSON.parse(resp)
+    @user.login = "stellaagapito"
+    @user.full_name = "Stella Minha Filha Linda"
+    @user.email = "stellasilvaagapito@gmail.com"
+    @user.age = 5
 
-    resp1 = RestClient.get "http://localhost:3000/users/#{result['id']}", :content_type => :json, :accept => :json
-    result1 = JSON.parse(resp1) 
-    expect(result1["full_name"]).to eq("Stella da Silva Agapito Correa")
-
-    param = {:user => 
-              {:login => "stellaagapito", 
-               :full_name => "Stella Minha Filha Linda", 
-               :email => "stellasilvaagapito@gmail.com", 
-               :age => "3"
-              }
-            }    
-    resp2 = RestClient.put "http://localhost:3000/users/#{result1['id']}", param.to_json, :content_type => :json, :accept => :json
-    result2 = JSON.parse(resp2) 
-    expect(resp2.code).to eq(200)
-    expect(result2["full_name"]).to eq("Stella Minha Filha Linda")    
+    @rest.put(@user.base_url(@rest.json['id']), @user.json)
+    expect(@rest.code_status).to eq(200)
+    expect(@rest.json["full_name"]).to eq("Stella Minha Filha Linda")    
   end
 
 end
 
-describe "Integration Tests" do
+describe "Integration Tests II" do
 
   before(:each) do
       @param = {:user => 
@@ -104,7 +83,7 @@ describe "Integration Tests" do
         }
   end
   
-  context "Simple Post" do
+  context "Simple Post", :integ => false do
     let(:resultado) {RestClient.post 'http://localhost:3000/users', @param.to_json, :content_type => :json, :accept => :json}
 
     it "Empty Login ", :integ => true  do  
