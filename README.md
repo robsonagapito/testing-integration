@@ -37,7 +37,7 @@ Simple project of API to run tests with RSpec/Ruby or JUnit/Cucumber/Java
 
 Ps: You must have your Server Application up to run your tests
 
-## Framework Testing with Ruby
+## Framework Testing with Java
 - Get in on folder/directory testing_java
 - Run maven to install libraries and dependecies.
   
