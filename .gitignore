@@ -6,6 +6,8 @@
 
 ## GENERAL ##
 .DS_Store
+*.iml
+
 
 ## PROJECT RUBY - LECTURE ##
 # Ignore bundler config.
@@ -28,6 +30,7 @@
 /testing_java/target/*
 /testing_java/testing_java.iml
 /testing_java/Intgration.iml
+target/
 
 ## PROJECT TESTING RUBY ##
 /testing_ruby/Gemfile.lock
