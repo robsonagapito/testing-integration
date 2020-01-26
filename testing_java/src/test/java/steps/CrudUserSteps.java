@@ -2,11 +2,9 @@ package steps;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import definitions.User;
-import groovy.json.internal.LazyMap;
-import org.junit.Assert;
+
 import support.RESTSupport;
 
 /**
@@ -24,7 +22,6 @@ public class CrudUserSteps {
         User.addFields(field, value);
     }
 
-
     @When("^user clicks on save button$")
     public void userClicksOnSaveButton() throws Throwable {
         RESTSupport.executePost(User.getEndPoint(),User.getFields());
@@ -32,27 +29,9 @@ public class CrudUserSteps {
         User.clearFields();
     }
 
-    @Then("^user should see \"([^\"]*)\" message$")
-    public void userShouldSeeMessage(String type) throws Throwable {
-        LazyMap messageJson = new LazyMap();
-        messageJson.put("save with success", 201);
-        messageJson.put("success", 200);
-        messageJson.put("no content", 204);
-        messageJson.put("not found", 404);
-        messageJson.put("unauthorized", 401);
-
-        Assert.assertEquals(messageJson.get(type),RESTSupport.getResponseCode());
-
-    }
-
     @And("^user wants to see user information$")
     public void userWantsToSeeUserInformation() throws Throwable {
         RESTSupport.executeGet(User.getEndPoint() + User.getLastUser() + ".json");
-    }
-
-    @Then("^user should see (.*) with value \"([^\"]*)\"$")
-    public void userShouldSeeLoginWithValue(String field, String value) throws Throwable {
-        Assert.assertEquals(value, RESTSupport.key(field));
     }
 
     @And("^user clicks on save button again$")
