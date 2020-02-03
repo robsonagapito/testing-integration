@@ -7,7 +7,8 @@ import groovy.json.internal.LazyMap;
  */
 public class User {
 
-    private static final String URL_USER = "http://localhost:3000/users/";
+//    private static final String URL_USER = "http://localhost:3000/users/";
+    private static final String URL_USER = "http://agapito-server.herokuapp.com/users/";
     private static LazyMap fieldsJson = new LazyMap();
     private static String lastUser;
 
