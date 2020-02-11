@@ -1,4 +1,4 @@
-package definitions;
+package definition;
 
 import groovy.json.internal.LazyMap;
 
